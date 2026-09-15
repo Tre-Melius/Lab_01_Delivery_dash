@@ -5,9 +5,23 @@ public class movement : MonoBehaviour
 {
     [SerializeField]float steerMove = 0.5f;
     [SerializeField] float steerSpeed = 0.05f;
+
+    private InputActionMap m_Map;
+    private InputAction m_Move;
+    private InputAction m_Turn;
+
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    // Attempt to add controller support
+    void Awake()
+    {
+         m_Map = new InputActionMap("Player");
+
+
+        m_Map = m_Map.AddAction("Move", InputActionType.Value);
+         
+    }
     // Update is called once per frame
     void Update()
     {
