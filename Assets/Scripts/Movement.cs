@@ -4,12 +4,24 @@ using UnityEngine.InputSystem;
 public class movement : MonoBehaviour
 {
     [SerializeField] public float steerSpeed = 300f;
-    [SerializeField] public float moveSpeed = 5f;
+    [SerializeField] public float currentSpeed = 5f;
+    [SerializeField] public float boostSpeed = 10f;
+    [SerializeField] public float regularSpeed = 5f;
 
     public Rigidbody2D _rb;
 
-    void Start()
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Boost"));
+        {
+            currentSpeed = boostSpeed;
+            Destroy(collision.gameObject);
+        }
+    }    
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        currentSpeed = regularSpeed;
     }
 
     void Update()
@@ -35,7 +47,7 @@ public class movement : MonoBehaviour
             steer = -1f;
         }
 
-        float moveAmount = move * moveSpeed * Time.deltaTime;
+        float moveAmount = move * currentSpeed * Time.deltaTime;
         float steerAmount = steer * steerSpeed * Time.deltaTime;
         // moveInput.x = steering (left/right stick or A/D)
         // moveInput.y = forward (up/down stick or W/S)
