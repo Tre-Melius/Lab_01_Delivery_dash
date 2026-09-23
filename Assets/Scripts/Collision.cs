@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class Delivery : MonoBehaviour
 {
- void OnCollisionEnter2d(Collision2D collision)
+ void OnTriggerEnter2d(Collider2D collision)
  {
-    Debug.Log("You have entered the Realm of doom, death, and destruction");
- 
- }
- void OnTrifferEnter2d(Collider2D collision)
- {
-    Debug.Log("You have made it through the realm");
+    if(collision.CompareTag("Package"))
+    {
+      Debug.Log("Picked up package");
+    }
+
+    if(collision.CompareTag("Customer"))
+    {
+         Debug.Log("Delivered the package");
+    }
  }
 }
